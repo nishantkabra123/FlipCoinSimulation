@@ -1,9 +1,9 @@
 HEADS=1
 TAILS=0
-count=0
 countHead=0
 countTail=0
-while [ $count -ne 10 ]
+TOTAL=21
+while [[ $countHead -lt $TOTAL && $countTail -lt $TOTAL ]]
 do
     toss=$((RANDOM%2))
 
@@ -15,9 +15,13 @@ do
     then
         ((countHead++))
         echo Heads is winner
-    fi 
-    ((count++))
+    fi
 done           
 
-echo Heads has won $countHead times
-echo Tails has won $countTail times
+if [ $countHead -eq $TOTAL ]
+then
+    echo Heads has won $countHead times by margin of $(($countHead-$countTail))
+elif [ $countTail -eq $TOTAL ]
+then
+    echo Tails has won $countTail times by margin of $(($countTail-$countHead))
+fi
